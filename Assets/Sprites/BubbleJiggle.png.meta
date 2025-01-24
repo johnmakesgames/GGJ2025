@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BubbleJiggle_0: -1465112840340518016
+      BubbleJiggle_1: -281475024324791993
+      BubbleJiggle_2: -183038839849949190
+      BubbleJiggle_3: 5406040997568602110
+      BubbleJiggle_4: 968863739068037896
+      BubbleJiggle_5: -6438132713214937213
+      BubbleJiggle_6: 4712025135017090066
+      BubbleJiggle_7: 3929394205981049993
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
