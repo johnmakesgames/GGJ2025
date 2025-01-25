@@ -8,6 +8,9 @@ public class MainMenu : MonoBehaviour
     GameObject SettingsMenu;
 
     [SerializeField]
+    GameObject CreditsPanel;
+
+    [SerializeField]
     string SceneToLoadOnPlay;
 
     PlayerStats stats;
@@ -64,10 +67,22 @@ public class MainMenu : MonoBehaviour
     public void OnSettingPressed()
     {
         SettingsMenu.SetActive(!SettingsMenu.activeInHierarchy);
+        CreditsPanel.SetActive(false);
+    }
+
+    public void OnCreditsPressed()
+    {
+        CreditsPanel.SetActive(!CreditsPanel.activeInHierarchy);
+        SettingsMenu.SetActive(false);
     }
 
     public void OnQuitPressed()
     {
         Application.Quit();
+    }
+
+    public void OnMainMenuPressed()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }

@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerInfo.Health <= 0)
         {
             PlayerInfo.SaveStats();
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
     }
 
