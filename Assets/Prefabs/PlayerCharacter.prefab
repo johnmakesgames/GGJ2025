@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 51768228396368723}
   - component: {fileID: 4162536359276438479}
   - component: {fileID: 5465852720149330108}
+  - component: {fileID: 3353387313573173348}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -296,6 +297,25 @@ MonoBehaviour:
   inflatingSpeedScale: 2.5
   bubbleForceMultiplier: 1000
   BubbleRechargeTimeSeconds: 10
+  PlayerInfo: {fileID: 0}
+--- !u!114 &3353387313573173348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023145184745122027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 862342973f9064944af37c6dcecbe05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 3
+  Money: 0
+  MaxBubbleCountMod: 0
+  MaxBubbleSizeMod: 0
+  BubbleRechargeTimeMod: 0
+  InflatingSpeedMod: 0
 --- !u!1 &3407241531603146687
 GameObject:
   m_ObjectHideFlags: 0
