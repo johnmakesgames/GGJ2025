@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     public PlayerStats PlayerInfo;
     private UiManager BubbleUIContainer;
 
+    private bool grounded;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -175,6 +177,22 @@ public class PlayerController : MonoBehaviour
             Vector2 direction = this.transform.up.normalized;
             rigidbody.AddForce(direction * bubbleForceMultiplier * bubbleSize * Time.deltaTime);
         }
+
+        if (grounded)
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                rigidbody.AddForce(new Vector2(-1000 * Time.deltaTime, 0));
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                rigidbody.AddForce(new Vector2(1000 * Time.deltaTime, 0));
+            }
+
+            grounded = false;
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -195,6 +213,18 @@ public class PlayerController : MonoBehaviour
             {
                 int missingBubbles = (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod) - bubbleCount;
                 AddBubble(missingBubbles);
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        // Refill to max bubbles when the player lands.
+        if (collision.gameObject.CompareTag("JohnTestGround"))
+        {
+            if (collision.transform.position.y < this.transform.position.y)
+            {
+                grounded = true;
             }
         }
     }

@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RainbowTexture_0: 8934447798986034866
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

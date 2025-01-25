@@ -8,14 +8,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Start()
     {
         shopKeeperUI = GameObject.FindGameObjectWithTag("ShopUI");
-        shopKeeperUI.SetActive(false);
+        shopKeeperUI?.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            shopKeeperUI.SetActive(true);
+            shopKeeperUI?.SetActive(true);
         }
     }
 
@@ -23,7 +23,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            shopKeeperUI.SetActive(false);
+            shopKeeperUI?.SetActive(false);
         }
     }
 }
