@@ -185,5 +185,18 @@ public class PlayerController : MonoBehaviour
             Destroy(collider.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Refill to max bubbles when the player lands.
+        if (collision.gameObject.CompareTag("JohnTestGround"))
+        {
+            if (collision.transform.position.y < this.transform.position.y)
+            {
+                int missingBubbles = (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod) - bubbleCount;
+                AddBubble(missingBubbles);
+            }
+        }
+    }
 }
 
