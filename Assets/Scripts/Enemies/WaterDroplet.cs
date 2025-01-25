@@ -37,4 +37,26 @@ public class WaterDroplet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.position.y < this.transform.position.y)
+        {
+            if (collision.gameObject.CompareTag("JohnTestGround"))
+            {
+                Destroy(this.gameObject);
+            }
+
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                var stats = collision.gameObject.GetComponent<PlayerStats>();
+                if (stats)
+                {
+                    stats.Health -= this.stats.GetDamageFromEnemy();
+                }
+
+                Destroy(this.gameObject);
+            }
+        }
+    }
 }

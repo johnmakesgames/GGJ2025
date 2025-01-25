@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ResetBubble
   - JohnTestGround
+  - BubbleUIContainer
   layers:
   - Default
   - TransparentFX
