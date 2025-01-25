@@ -25,6 +25,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]
     Sprite ItemFourImage;
 
+    [SerializeField]
+    float NormalizedPercentageThroughLevel = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,6 +46,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
             shopKeeperUI?.SetActive(true);
             shopKeeperUI.GetComponent<ShopKeeperUI>()?.ActivateShop(ItemOneOption, ItemTwoOption, ItemThreeOption, ItemFourOption);
             shopKeeperUI.GetComponent<ShopKeeperUI>()?.SetShopImages(ItemOneImage, ItemTwoImage, ItemThreeImage, ItemFourImage);
+
+            collision.gameObject.GetComponent<PlayerStats>().distanceThroughLevel = Mathf.Max(collision.gameObject.GetComponent<PlayerStats>().distanceThroughLevel, NormalizedPercentageThroughLevel);
         }
     }
 
