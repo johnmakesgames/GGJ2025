@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
         waitingForBubbleKeyLift = false;
         BubbleRechargeTimer = 0.0f;
         PlayerInfo = GetComponent<PlayerStats>();
+        PlayerInfo.LoadStats();
         BubbleUIContainer = GameObject.FindGameObjectWithTag("BubbleUIContainer").GetComponent<UiManager>();
     }
 
@@ -117,6 +119,12 @@ public class PlayerController : MonoBehaviour
             {
                 RemoveBubble(1);
             }
+        }
+
+        if (PlayerInfo.Health <= 0)
+        {
+            PlayerInfo.SaveStats();
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
     }
 
