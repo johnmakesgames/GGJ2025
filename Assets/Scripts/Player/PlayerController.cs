@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
 
     private bool waitingForBubbleKeyLift;
 
+    public PlayerStats PlayerInfo;
+    private UiManager BubbleUIContainer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,6 +51,8 @@ public class PlayerController : MonoBehaviour
         bubbleCount = 3;
         waitingForBubbleKeyLift = false;
         BubbleRechargeTimer = 0.0f;
+        PlayerInfo = GetComponent<PlayerStats>();
+        BubbleUIContainer = GameObject.FindGameObjectWithTag("BubbleUIContainer").GetComponent<UiManager>();
     }
 
     // Update is called once per frame
@@ -55,12 +60,12 @@ public class PlayerController : MonoBehaviour
     {
         playerCamera.transform.SetPositionAndRotation(transform.position + new Vector3(0.0f, 0.0f, -10.0f), Quaternion.Euler(0.0f, 0.0f, 0.0f));
 
-        float normalisedSize = bubbleSize / MaxBubbleSize;
+        float normalisedSize = bubbleSize / (MaxBubbleSize + PlayerInfo.MaxBubbleSizeMod);
 
         timeSinceInput += Time.deltaTime;
         BubbleRechargeTimer += Time.deltaTime;
 
-        if(BubbleRechargeTimer > BubbleRechargeTimeSeconds)
+        if(BubbleRechargeTimer > (BubbleRechargeTimeSeconds + PlayerInfo.BubbleRechargeTimeMod))
         {
             AddBubble(1);
             BubbleRechargeTimer = 0.0f;
@@ -72,7 +77,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && (timeSinceInput > inputDelay))
             {
                 //Inflating Bubble
-                bubbleSize += (animationCurve.Evaluate(normalisedSize) * inflatingSpeedScale * Time.deltaTime);
+                bubbleSize += (animationCurve.Evaluate(normalisedSize) * (inflatingSpeedScale + PlayerInfo.InflatingSpeedMod) * Time.deltaTime);
 
                 if (normalisedSize >= 1)
                 {
@@ -96,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         bubbleSpriteObject.GetComponent<Transform>().localScale = new Vector3(normalisedSize * 2, normalisedSize * 2, normalisedSize * 2);
 
-        Debug.Log("Bubbles left: " + bubbleCount + "/" + MaxBubbleCount);
+        Debug.Log("Bubbles left: " + bubbleCount + "/" + (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod));
         Debug.Log("Bubble size: " + bubbleSize);
 
         if (Application.isEditor)
@@ -115,14 +120,27 @@ public class PlayerController : MonoBehaviour
 
     private void AddBubble(int count)
     {
+        int originalCount = bubbleCount;
+
         bubbleCount += count;
-        bubbleCount = Mathf.Clamp(bubbleCount, 0, MaxBubbleCount);
+        bubbleCount = Mathf.Clamp(bubbleCount, 0, (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod));
+        
+        BubbleUIContainer.AddBubble(bubbleCount - originalCount);
     }
 
     public void RemoveBubble(int count)
     {
+        int originalCount = bubbleCount;
+
         bubbleCount -= count;
-        bubbleCount = Mathf.Clamp(bubbleCount, 0, MaxBubbleCount);
+        bubbleCount = Mathf.Clamp(bubbleCount, 0, (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod));
+
+        BubbleUIContainer.RemoveBubble(originalCount - bubbleCount);
+    }
+
+    public int GetBubbleCount()
+    {
+        return bubbleCount;
     }
 
     private void FixedUpdate()
@@ -165,6 +183,19 @@ public class PlayerController : MonoBehaviour
         {
             AddBubble(1);
             Destroy(collider.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Refill to max bubbles when the player lands.
+        if (collision.gameObject.CompareTag("JohnTestGround"))
+        {
+            if (collision.transform.position.y < this.transform.position.y)
+            {
+                int missingBubbles = (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod) - bubbleCount;
+                AddBubble(missingBubbles);
+            }
         }
     }
 }
