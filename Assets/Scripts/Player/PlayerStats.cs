@@ -25,6 +25,7 @@ public class PlayerStats : MonoBehaviour
 
     public float FastestTimeTakenToComplete = -1;
     public float TimeSinceStart = -1;
+    public int TotalMoneySpent = 0;
 
     private void Update()
     {
@@ -35,6 +36,12 @@ public class PlayerStats : MonoBehaviour
     {
         Health += otherStats.Health;
         Money += otherStats.Money;
+
+        if (otherStats.Money < 0)
+        {
+            TotalMoneySpent += Mathf.Abs(otherStats.Money);
+        }
+
         MaxBubbleCountMod += otherStats.MaxBubbleCountMod;
         MaxBubbleSizeMod += otherStats.MaxBubbleSizeMod;
         BubbleRechargeTimeMod += otherStats.BubbleRechargeTimeMod;
@@ -86,7 +93,7 @@ public class PlayerStats : MonoBehaviour
 
 
     static readonly string savePath = Path.Combine(Environment.CurrentDirectory, $"GameProgressSave.frgSave");
-    static readonly int loadableVersion = 2;
+    static readonly int loadableVersion = 3;
     public void LoadStats()
     {
         if (File.Exists(savePath))
@@ -122,7 +129,7 @@ public class PlayerStats : MonoBehaviour
                     lastDistanceThroughLevel = 0;
                 }
 
-                if (lastDistanceThroughLevel > 0)
+                if (lastDistanceThroughLevel > 1)
                 {
                     lastDistanceThroughLevel = 0;
                 }
@@ -152,6 +159,11 @@ public class PlayerStats : MonoBehaviour
                     FastestTimeTakenToComplete = -1;
                 }
 
+                if (!int.TryParse(saveData[8], out TotalMoneySpent))
+                {
+                    TotalMoneySpent = 0;
+                }
+
                 TimeSinceStart = 0;
 
             }
@@ -164,13 +176,12 @@ public class PlayerStats : MonoBehaviour
 
     public void SaveStats()
     {
-        string path = Path.Combine(Environment.CurrentDirectory, $"{Environment.UserName}_Save.frgSave");
-        if (File.Exists(path))
+        if (File.Exists(savePath))
         {
-            File.Delete(path);
+            File.Delete(savePath);
         }
 
-        using (FileStream fs = File.Create(path))
+        using (FileStream fs = File.Create(savePath))
         {
             using (StreamWriter sw = new StreamWriter(fs))
             {
@@ -198,6 +209,8 @@ public class PlayerStats : MonoBehaviour
                 {
                     sw.WriteLine(FastestTimeTakenToComplete);
                 }
+
+                sw.WriteLine(TotalMoneySpent);
 
                 sw.Flush();
             }

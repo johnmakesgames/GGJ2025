@@ -32,6 +32,9 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI TimeTakenToCompleteText;
+    
+    [SerializeField]
+    TextMeshProUGUI TotalMoneySpent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,6 +53,7 @@ public class MainMenu : MonoBehaviour
         MaxBubbleSizeModText.text = stats.MaxBubbleSizeMod.ToString();
         InflatingSpeedModText.text = stats.InflatingSpeedMod.ToString();
         TimeTakenToCompleteText.text = (stats.FastestTimeTakenToComplete != -1) ? $"{stats.FastestTimeTakenToComplete.ToString()} Seconds" : "Never Completed";
+        TotalMoneySpent.text = stats.TotalMoneySpent.ToString();
     }
 
     public void OnPlayPressed()

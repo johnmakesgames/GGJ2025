@@ -6615,6 +6615,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 793603213}
     m_Modifications:
+    - target: {fileID: 4487167865829987962, guid: cd0c9b25dd1947242a89e931ffc7911b, type: 3}
+      propertyPath: NormalizedPercentageThroughLevel
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5057820672952364355, guid: cd0c9b25dd1947242a89e931ffc7911b, type: 3}
       propertyPath: m_Name
       value: ShopKeeper (1)
@@ -9936,6 +9940,9 @@ MonoBehaviour:
   ChangedMaterial: {fileID: 0}
   distanceThroughLevel: 0
   furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
 --- !u!1 &474417994
 GameObject:
   m_ObjectHideFlags: 0
@@ -17552,6 +17559,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4487167865829987962, guid: cd0c9b25dd1947242a89e931ffc7911b, type: 3}
+      propertyPath: NormalizedPercentageThroughLevel
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5057820672952364355, guid: cd0c9b25dd1947242a89e931ffc7911b, type: 3}
       propertyPath: m_Name
       value: ShopKeeper
