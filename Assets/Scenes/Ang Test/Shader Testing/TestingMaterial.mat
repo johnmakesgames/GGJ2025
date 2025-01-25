@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TestingMaterial
-  m_Shader: {fileID: 4800000, guid: e76dc1cd3d802234ea9fcf55b381ecbb, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5a82afb2b2d90774d9c8e7b2c1df33be, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -43,6 +43,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RainbowTexture:
+        m_Texture: {fileID: 2800000, guid: ac74b46eafb9caa48a9f436d031ea892, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
@@ -50,6 +54,7 @@ Material:
     m_Colors:
     - _AnimateXY: {r: 1.05, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColourMask: {r: 0, g: 0, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -69,12 +69,13 @@ Shader "Unlit/ColourChange"
                 fixed4 frag(v2f i) : SV_Target
                 {
                     //Increment time
-                    currentTime += frac(_Time.y);
+                    currentTime += _Time.y; //(0, 1) exclusive
                      
+                    //currentTime = cos(currentTime);
                     
                     // sample the texture
                     float2 uv = i.uv;
-                    float2 rainbowUV = float2(currentTime, 0);
+                    float2 rainbowUV = frac(uv + float2(currentTime, 0))/0.999999999f;
                     //uv.xy *= 2;
                     //uv.x += 0.5;
                     //return fixed4(uv, 0, 1);
