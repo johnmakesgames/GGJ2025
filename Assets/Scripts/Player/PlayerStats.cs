@@ -29,4 +29,14 @@ public class PlayerStats : MonoBehaviour
         BubbleRechargeTimeMod -= otherStats.BubbleRechargeTimeMod;
         InflatingSpeedMod -= otherStats.InflatingSpeedMod;
     }
+
+    public void CopyFromStats(PlayerStats otherStats)
+    {
+        Health = otherStats.Health;
+        Money = otherStats.Money;
+        MaxBubbleCountMod = otherStats.MaxBubbleCountMod;
+        MaxBubbleSizeMod = otherStats.MaxBubbleSizeMod;
+        BubbleRechargeTimeMod = otherStats.BubbleRechargeTimeMod;
+        InflatingSpeedMod = otherStats.InflatingSpeedMod;
+    }
 }

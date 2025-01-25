@@ -1363,12 +1363,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemOneOption: {fileID: 2908057139318822222}
   ItemOneButton: {fileID: 1171092329819588734}
+  ItemOneImage: {fileID: 136270724593620409}
   ItemTwoOption: {fileID: 7117587516919541093}
   ItemTwoButton: {fileID: 7705326792246447225}
+  ItemTwoImage: {fileID: 2299159830851566464}
   ItemThreeOption: {fileID: 3767742533751952449}
   ItemThreeButton: {fileID: 1784017393304900289}
+  ItemThreeImage: {fileID: 8499877074868918087}
   ItemFourOption: {fileID: 6161131201047588579}
   ItemFourButton: {fileID: 8946270801441659345}
+  ItemFourImage: {fileID: 4983597703048462533}
 --- !u!1 &5259679155604412762
 GameObject:
   m_ObjectHideFlags: 0
