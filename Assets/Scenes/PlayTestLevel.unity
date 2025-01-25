@@ -5491,6 +5491,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3353387313573173348, guid: 89dea4abd4cb9db4ca55bfc1a31c9186, type: 3}
+      propertyPath: DefaultMaterial
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3353387313573173348, guid: 89dea4abd4cb9db4ca55bfc1a31c9186, type: 3}
+      propertyPath: RainbowMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d2dfaeb14bf43944a2b87c302f497d7, type: 2}
+    - target: {fileID: 3353387313573173348, guid: 89dea4abd4cb9db4ca55bfc1a31c9186, type: 3}
       propertyPath: InflatingSpeedMod
       value: 0
       objectReference: {fileID: 0}
@@ -5505,7 +5513,7 @@ PrefabInstance:
     - target: {fileID: 4530119509016416689, guid: 89dea4abd4cb9db4ca55bfc1a31c9186, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 2d2dfaeb14bf43944a2b87c302f497d7, type: 2}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7233667359317303987, guid: 89dea4abd4cb9db4ca55bfc1a31c9186, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.2896817
@@ -6725,6 +6733,9 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  IsRainbow: 0
+  DefaultMaterial: {fileID: 0}
+  RainbowMaterial: {fileID: 0}
 --- !u!1 &474417994
 GameObject:
   m_ObjectHideFlags: 0
@@ -26292,6 +26303,14 @@ PrefabInstance:
     - target: {fileID: 3653074077488170929, guid: dc179520185ff214d897a8a6f94ecf72, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095009338665665909, guid: dc179520185ff214d897a8a6f94ecf72, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5123453965092870571, guid: dc179520185ff214d897a8a6f94ecf72, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

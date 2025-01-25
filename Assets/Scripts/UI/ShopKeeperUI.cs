@@ -80,20 +80,36 @@ public class ShopKeeperUI : MonoBehaviour
         {
             ItemOneButton.interactable = false;
         }
+        else
+        {
+            ItemOneButton.interactable = true;
+        }
 
         if (player.Money + ItemTwoOption.Money < 0)
         {
             ItemTwoButton.interactable = false;
+        }
+        else
+        {
+            ItemTwoButton.interactable = true;
         }
 
         if (player.Money + ItemThreeOption.Money < 0)
         {
             ItemThreeButton.interactable = false;
         }
+        else
+        {
+            ItemThreeButton.interactable = true;
+        }
 
         if (player.Money + ItemFourOption.Money < 0)
         {
             ItemFourButton.interactable = false;
+        }
+        else
+        {
+            ItemFourButton.interactable = true;
         }
     }
 

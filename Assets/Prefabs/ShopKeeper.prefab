@@ -79,12 +79,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862342973f9064944af37c6dcecbe05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
-  Money: 0
-  MaxBubbleCountMod: 0
+  Health: 0
+  Money: -200
+  MaxBubbleCountMod: 1
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
 --- !u!1 &957133255321505773
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,12 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862342973f9064944af37c6dcecbe05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
-  Money: 0
+  Health: 0
+  Money: -10
   MaxBubbleCountMod: 0
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  appliesMaterialChange: 1
+  DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  ChangedMaterial: {fileID: 2100000, guid: 2d2dfaeb14bf43944a2b87c302f497d7, type: 2}
 --- !u!1 &1115782379680952226
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,12 +185,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862342973f9064944af37c6dcecbe05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
-  Money: 0
+  Health: 0
+  Money: -300
   MaxBubbleCountMod: 0
   MaxBubbleSizeMod: 0
-  BubbleRechargeTimeMod: 0
+  BubbleRechargeTimeMod: -1
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
 --- !u!1 &3517227738211712000
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,12 +590,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862342973f9064944af37c6dcecbe05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
-  Money: 0
+  Health: 1
+  Money: -150
   MaxBubbleCountMod: 0
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
 --- !u!1 &8647109918770990294
 GameObject:
   m_ObjectHideFlags: 0
