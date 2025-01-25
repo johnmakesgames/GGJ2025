@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 8faa3543b1043cd42822a79791e5c43d
+guid: 3eca7cc88a2a2e643b51bea48ab7b9d4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2820143329777312509
-    second: Frog_0
-  - first:
-      213: -1081280975163990012
-    second: Frog_1
+      213: 5520847670183567339
+    second: ShopSign_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Frog_0
+      name: ShopSign_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 32
-        height: 64
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: df2601baa69232720800000000000000
-      internalID: 2820143329777312509
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Frog_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 40066f49ea48ef0f0800000000000000
-      internalID: -1081280975163990012
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Frog_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd8045aa2f931d5409e6a1991e7df421
-      internalID: -644705729
+      spriteID: bef955094bdfd9c40800000000000000
+      internalID: 5520847670183567339
       vertices: []
       indices: 
       edges: []
@@ -172,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3978c169e4beb29409f95a7a5fa270a4
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -182,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Frog_0: 2820143329777312509
-      Frog_1: -1081280975163990012
-      Frog_2: -644705729
+      ShopSign_0: 5520847670183567339
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
