@@ -1,5 +1,9 @@
 using System;
+using System.Net;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -43,6 +47,31 @@ public class PlayerController : MonoBehaviour
     private UiManager BubbleUIContainer;
 
     private bool grounded;
+
+    [Space(10)]
+    [Header("Shooting")]
+    private bool canExtendTongue;
+    private bool tongueGoingRight = false;
+    private bool isTongueExtended = false;
+    [SerializeField] 
+    private AnimationCurve TongueLengthCurve;
+    private float tongueLength;
+    [SerializeField] 
+    private float tongueExtensionSpeed;
+    [SerializeField]
+    private float maxTongueLength;
+    [SerializeField]
+    private float tongueScale;
+    [SerializeField]
+    private Transform mouthTransform;
+    [SerializeField]
+    private Transform tongueEndPosition;
+    [SerializeField]
+    private GameObject tongueSprite;
+
+    [Header("Debugs")]
+    [SerializeField] private bool bubbleDetailLog;
+    [SerializeField] private bool tongueDetailLog;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -103,8 +132,105 @@ public class PlayerController : MonoBehaviour
 
         bubbleSpriteObject.GetComponent<Transform>().localScale = new Vector3(normalisedSize * 2, normalisedSize * 2, normalisedSize * 2);
 
-        Debug.Log("Bubbles left: " + bubbleCount + "/" + (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod));
-        Debug.Log("Bubble size: " + bubbleSize);
+        if (bubbleDetailLog)
+        {
+            Debug.Log("Bubbles left: " + bubbleCount + "/" + (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod));
+            Debug.Log("Bubble size: " + bubbleSize);
+        }
+
+
+        //Tongue Controls
+        if (Input.GetKeyDown(KeyCode.E) && canExtendTongue)
+        {
+            isTongueExtended = true;
+            canExtendTongue = false;
+            tongueGoingRight = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && canExtendTongue)
+        {
+            isTongueExtended = true;
+            canExtendTongue = false;
+            tongueGoingRight = false;
+        }
+
+        float normalisedTongueLength = tongueLength / maxTongueLength;
+        if (isTongueExtended)
+        {
+            tongueLength += TongueLengthCurve.Evaluate(normalisedTongueLength) * tongueExtensionSpeed * Time.deltaTime;
+        }
+        else
+        {
+            tongueLength -= TongueLengthCurve.Evaluate(normalisedTongueLength) * tongueExtensionSpeed * Time.deltaTime;
+        }
+
+        if(canExtendTongue == false)
+        {
+            if(tongueLength <= 0)
+            {
+                canExtendTongue = true;
+            }
+            else if(tongueLength >= maxTongueLength)
+            {
+                canExtendTongue = false;
+            }
+        }
+
+        //Direction tongue is facing (l/r)
+        Vector3 tongueDirection = Vector3.zero;
+        if (tongueGoingRight)
+        {
+            tongueDirection = Vector3.right;
+        }
+        else
+        {
+            tongueDirection = Vector3.right * -1.0f;
+        }
+
+        tongueLength = Mathf.Min(tongueLength, maxTongueLength);
+        tongueLength = Mathf.Max(0, tongueLength);
+        //Calculate current length of the tongue.
+        float length = tongueLength * tongueScale;
+
+        if (length > 0)
+        {
+            //Calculate tongue mid and end points.
+            Vector2 midPoint = tongueDirection * (length / 2.0f);
+            Vector2 endPosition = tongueDirection * length;
+
+            tongueSprite.transform.localPosition = midPoint;
+            tongueEndPosition.transform.localPosition = endPosition;
+        }
+        else
+        {
+            tongueSprite.transform.localPosition = mouthTransform.localPosition;
+            tongueEndPosition.transform.localPosition = mouthTransform.localPosition;
+        }
+
+        //tongueSprite.transform.localScale = Vector3.one;
+        //tongueSprite.transform.localRotation = Quaternion.identity;
+
+        Vector3 scale = tongueSprite.transform.localScale;
+        scale.x = length;
+        tongueSprite.transform.localScale = scale;
+
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            isTongueExtended = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            isTongueExtended = false;
+        }
+
+        if (tongueDetailLog)
+        {
+            Debug.Log("Tongue Length: " + tongueLength);
+            Debug.Log("Normalised Tongue Length: " + normalisedTongueLength);
+        }
+
 
         if (Application.isEditor)
         {
@@ -197,7 +323,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-          if (collider.gameObject.tag == "ResetBubble")
+        if (collider.gameObject.tag == "ResetBubble")
         {
             AddBubble(1);
             Destroy(collider.gameObject);
