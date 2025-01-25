@@ -16,12 +16,15 @@ public class EnemyFrogController : MonoBehaviour
     public float MinimumDistanceToEnd = 0;
     private int direction = 1;
 
+    EnemyStats stats;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.transform.position = pointOne.position;
         nextPoint = pointOne.transform.position;
         CalculateArc(pointOne.position, pointTwo.position);
+        stats = this.GetComponent<EnemyStats>();
     }
 
     Vector2 circleCenter;
@@ -90,6 +93,19 @@ public class EnemyFrogController : MonoBehaviour
 
                 waitTimeAfterLanding = DelayFromLanding;
             }
+        }
+
+        if (!stats.IsAlive())
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.position.y < this.transform.position.y && collision.gameObject.CompareTag("JohnTestGround"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }
