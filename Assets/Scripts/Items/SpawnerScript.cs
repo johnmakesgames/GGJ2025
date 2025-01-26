@@ -6,6 +6,9 @@ public class SpawnerScript : MonoBehaviour
     GameObject SpawnPrefab;
     GameObject activeSpawn;
 
+    [SerializeField]
+    Animator spriteAnimator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,7 +20,20 @@ public class SpawnerScript : MonoBehaviour
     {
         if (!activeSpawn)
         {
-            activeSpawn = Instantiate(SpawnPrefab, this.transform.position, this.transform.rotation);
+            if (!spriteAnimator.GetBool("SpawnNewDrop"))
+            {
+                spriteAnimator.SetBool("SpawnNewDrop", true);
+                return;
+            }
+            else
+            {
+                spriteAnimator.SetBool("SpawnNewDrop", false);
+            }
         }
+    }
+
+    public void OnAnimationEnd()
+    {
+        activeSpawn = Instantiate(SpawnPrefab, this.transform.position, this.transform.rotation);
     }
 }

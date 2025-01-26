@@ -387,6 +387,15 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
+  distanceThroughLevel: 0
+  furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
+  TotalMoneySpent: 0
 --- !u!1 &1480769860787810659
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +453,15 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
+  distanceThroughLevel: 0
+  furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
+  TotalMoneySpent: 0
 --- !u!1 &2440650699635209896
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,6 +654,15 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
+  distanceThroughLevel: 0
+  furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
+  TotalMoneySpent: 0
 --- !u!1 &3198140570836258259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,7 +1704,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7862664614208717831, guid: 52859f96afc76584294a1ae20c767e4f, type: 3}
+  m_Sprite: {fileID: -5682809686868360691, guid: f67169adc1e747c4b979849d5e3b0168, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1827,7 +1854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 6823520842785216717, guid: 6ec46f8ed0cecc249ba4c67b906a509d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2030,6 +2057,15 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: -1
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
+  distanceThroughLevel: 0
+  furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
+  TotalMoneySpent: 0
 --- !u!1 &6987197432123377166
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,7 +2131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7862664614208717831, guid: 52859f96afc76584294a1ae20c767e4f, type: 3}
+  m_Sprite: {fileID: -5682809686868360691, guid: f67169adc1e747c4b979849d5e3b0168, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
