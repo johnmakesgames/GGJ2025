@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9075862300952972377}
   - component: {fileID: 8029137061802593589}
+  - component: {fileID: 1660339039243775484}
   m_Layer: 0
   m_Name: LeftPad
   m_TagString: Untagged
@@ -87,6 +88,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1660339039243775484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282125842767500290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3e8873119a3be4f8333b463f03cd6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &285765340373873321
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550367119376111605}
   - component: {fileID: 3957394244813892320}
+  - component: {fileID: 5371975103360591341}
   m_Layer: 0
   m_Name: RightPad
   m_TagString: Untagged
@@ -208,6 +222,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5371975103360591341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407694670984373440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3e8873119a3be4f8333b463f03cd6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8592342202548580495
 PrefabInstance:
   m_ObjectHideFlags: 0
