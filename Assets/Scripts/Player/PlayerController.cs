@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -42,11 +43,6 @@ public class PlayerController : MonoBehaviour
     public int MaxBubbleCount { get; set; } = 5;
     private int bubbleCount { get; set; }
 
-    [SerializeField]
-    private int startingAmmoCount;
-    public int MaxAmmoCount { get; set; } = 5;
-    private int ammoCount { get; set; }
-
     private bool waitingForBubbleKeyLift;
 
     [HideInInspector] public PlayerStats PlayerInfo;
@@ -54,15 +50,22 @@ public class PlayerController : MonoBehaviour
 
     private bool grounded;
 
-    [SerializeField] 
-    private GameObject crosshairSprite;
+    [SerializeField]
+    Animator spriteAnimator;
+
 
     [Space(10)]
     [Header("Shooting")]
     [SerializeField]
+    private GameObject crosshairSprite;
+    [SerializeField]
     GameObject bulletPrefab;
     [SerializeField]
     private int fireForceStrength;
+    [SerializeField]
+    private int startingAmmoCount;
+    public int MaxAmmoCount { get; set; } = 5;
+    private int ammoCount { get; set; }
     private bool canExtendTongue;
     private bool tongueGoingRight = false;
     private bool isTongueExtended = false;
@@ -98,11 +101,22 @@ public class PlayerController : MonoBehaviour
         waitingForBubbleKeyLift = false;
         BubbleRechargeTimer = 0.0f;
         PlayerInfo = GetComponent<PlayerStats>();
+        PlayerInfo.LoadStats();
         HUDUIContainer = GameObject.FindGameObjectWithTag("BubbleUIContainer").GetComponent<UiManager>();
 
         for (int i = 0; i < startingAmmoCount; i++)
         {
             AddAmmo(1);
+        }
+
+        if(crosshairSprite == null)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                Debug.Log("Need to set the inspector value for crosshairSprite in the PlayerController script to be the crosshair provided under the UICanvas prefab.");
+            }
+
+            Application.Quit();
         }
     }
 
@@ -138,6 +152,8 @@ public class PlayerController : MonoBehaviour
                     timeSinceInput = Mathf.Min(timeSinceInput, 0.0f);
                     waitingForBubbleKeyLift = true;
                 }
+
+                spriteAnimator.SetBool("BlowingBubble", true);
             }
         }
 
@@ -147,6 +163,7 @@ public class PlayerController : MonoBehaviour
             bubbleSize = 0;
             timeSinceInput = Mathf.Min(timeSinceInput, 0);
             waitingForBubbleKeyLift = false;
+            spriteAnimator.SetBool("BlowingBubble", false);
             RemoveBubble(1);
         }
 
@@ -273,6 +290,12 @@ public class PlayerController : MonoBehaviour
             {
                 RemoveAmmo(1);
             }
+        }
+
+        if (PlayerInfo.Health <= 0)
+        {
+            PlayerInfo.SaveStats();
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
 
         crosshairSprite.transform.position = Input.mousePosition;
@@ -440,6 +463,20 @@ public class PlayerController : MonoBehaviour
             if (collision.transform.position.y < this.transform.position.y)
             {
                 grounded = true;
+                spriteAnimator.SetBool("Grounded", true);
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Refill to max bubbles when the player lands.
+        if (collision.gameObject.CompareTag("JohnTestGround"))
+        {
+            if (collision.transform.position.y < this.transform.position.y)
+            {
+                grounded = true;
+                spriteAnimator.SetBool("Grounded", false);
             }
         }
     }

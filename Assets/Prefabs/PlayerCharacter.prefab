@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 4162536359276438479}
   - component: {fileID: 5465852720149330108}
   - component: {fileID: 3353387313573173348}
+  - component: {fileID: 1743648101562564088}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -300,8 +301,12 @@ MonoBehaviour:
   inflatingSpeedScale: 2.5
   bubbleForceMultiplier: 1000
   BubbleRechargeTimeSeconds: 10
+  startingAmmoCount: 0
   PlayerInfo: {fileID: 0}
+  spriteAnimator: {fileID: 1743648101562564088}
   crosshairSprite: {fileID: 0}
+  bulletPrefab: {fileID: 8354578551151783803, guid: f100a6b24cec31d47bd64e4eae4bf351, type: 3}
+  fireForceStrength: 50
   TongueLengthCurve:
     serializedVersion: 2
     m_Curve:
@@ -343,7 +348,7 @@ MonoBehaviour:
   tongueSprite: {fileID: 6373957234125653586}
   bubbleDetailLog: 0
   tongueDetailLog: 0
-  ammoDetailLog: 1
+  ammoDetailLog: 0
 --- !u!114 &3353387313573173348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +370,34 @@ MonoBehaviour:
   appliesMaterialChange: 0
   DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   ChangedMaterial: {fileID: 0}
+  distanceThroughLevel: 0
+  furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
+  TotalMoneySpent: 0
+--- !u!95 &1743648101562564088
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023145184745122027}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c97854020d005a64bba3bc3ca55d2949, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3407241531603146687
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6877599544623728628}
   - component: {fileID: 4208430527290097036}
+  - component: {fileID: 8314235426754158929}
   m_Layer: 0
   m_Name: Tongue
   m_TagString: Untagged
@@ -846,3 +880,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &8314235426754158929
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373957234125653586}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
