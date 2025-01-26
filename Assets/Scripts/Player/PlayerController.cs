@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     private float BubbleRechargeTimer = 0.0f;
 
     public float MaxBubbleSize { get; set; } = 2.5f;
-    public int MaxBubbleCount { get; set; } = 5;
+    public int MaxBubbleCount { get; set; } = 3;
     private int bubbleCount { get; set; }
 
     private bool waitingForBubbleKeyLift;
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     private int fireForceStrength;
     [SerializeField]
     private int startingAmmoCount;
-    public int MaxAmmoCount { get; set; } = 5;
+    public int MaxAmmoCount { get; set; } = 3;
     private int ammoCount { get; set; }
     private bool canExtendTongue;
     private bool tongueGoingRight = false;
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         bubbleSize = 0;
         ammoCount = 0;
-        bubbleCount = 3;
+        bubbleCount = MaxBubbleCount;
         waitingForBubbleKeyLift = false;
         BubbleRechargeTimer = 0.0f;
         PlayerInfo = GetComponent<PlayerStats>();
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
     {
         int originalAmmoCount = ammoCount;
         ammoCount += count;
-        ammoCount = Mathf.Clamp(ammoCount, 0, MaxAmmoCount);
+        ammoCount = Mathf.Clamp(ammoCount, 0, (MaxAmmoCount + PlayerInfo.MaxFlyCountMod));
         HUDUIContainer.AddAmmo(ammoCount - originalAmmoCount); 
     }
 
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
     {
         int originalAmmoCount = ammoCount;
         ammoCount -= count;
-        ammoCount = Mathf.Clamp(ammoCount, 0, MaxAmmoCount);
+        ammoCount = Mathf.Clamp(ammoCount, 0, (MaxAmmoCount + PlayerInfo.MaxFlyCountMod));
         HUDUIContainer.RemoveAmmo(originalAmmoCount - ammoCount);
     }
 
@@ -221,9 +221,9 @@ public class PlayerController : MonoBehaviour
             if (hit.collider != null)
             {
                 // Refill to max bubbles when the player lands.
-                if (hit.collider.gameObject.CompareTag("JohnTestGround"))
+;                if (hit.collider.gameObject.CompareTag("JohnTestGround"))
                 {
-                    if (hit.collider.gameObject.transform.position.y < this.transform.position.y)
+                    if (hit.point.y < this.transform.position.y)
                     {
                         return true;
                     }
@@ -546,7 +546,7 @@ public class PlayerController : MonoBehaviour
 
         if (ammoDetailLog)
         {
-            Debug.Log("Ammo left: " + ammoCount + "/" + (MaxAmmoCount));
+            Debug.Log("Ammo left: " + ammoCount + "/" + ((MaxAmmoCount + PlayerInfo.MaxFlyCountMod)));
         }
 
         if (Input.GetKeyDown("o"))
