@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed;
     [SerializeField]
     private float maxRotationAngle;
+
     [Space(10)]
     [Header("Bubble")]
     [SerializeField]
@@ -41,15 +42,27 @@ public class PlayerController : MonoBehaviour
     public int MaxBubbleCount { get; set; } = 5;
     private int bubbleCount { get; set; }
 
+    [SerializeField]
+    private int startingAmmoCount;
+    public int MaxAmmoCount { get; set; } = 5;
+    private int ammoCount { get; set; }
+
     private bool waitingForBubbleKeyLift;
 
-    public PlayerStats PlayerInfo;
-    private UiManager BubbleUIContainer;
+    [HideInInspector] public PlayerStats PlayerInfo;
+    private UiManager HUDUIContainer;
 
     private bool grounded;
 
+    [SerializeField] 
+    private GameObject crosshairSprite;
+
     [Space(10)]
     [Header("Shooting")]
+    [SerializeField]
+    GameObject bulletPrefab;
+    [SerializeField]
+    private int fireForceStrength;
     private bool canExtendTongue;
     private bool tongueGoingRight = false;
     private bool isTongueExtended = false;
@@ -72,6 +85,7 @@ public class PlayerController : MonoBehaviour
     [Header("Debugs")]
     [SerializeField] private bool bubbleDetailLog;
     [SerializeField] private bool tongueDetailLog;
+    [SerializeField] private bool ammoDetailLog;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,11 +93,17 @@ public class PlayerController : MonoBehaviour
         bubbleDetector = GetComponentInChildren<Collider2D> ();
         rigidbody = GetComponent<Rigidbody2D>();
         bubbleSize = 0;
+        ammoCount = 0;
         bubbleCount = 3;
         waitingForBubbleKeyLift = false;
         BubbleRechargeTimer = 0.0f;
         PlayerInfo = GetComponent<PlayerStats>();
-        BubbleUIContainer = GameObject.FindGameObjectWithTag("BubbleUIContainer").GetComponent<UiManager>();
+        HUDUIContainer = GameObject.FindGameObjectWithTag("BubbleUIContainer").GetComponent<UiManager>();
+
+        for (int i = 0; i < startingAmmoCount; i++)
+        {
+            AddAmmo(1);
+        }
     }
 
     // Update is called once per frame
@@ -138,7 +158,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Bubble size: " + bubbleSize);
         }
 
-
         //Tongue Controls
         if (Input.GetKeyDown(KeyCode.E) && canExtendTongue)
         {
@@ -189,6 +208,7 @@ public class PlayerController : MonoBehaviour
 
         tongueLength = Mathf.Min(tongueLength, maxTongueLength);
         tongueLength = Mathf.Max(0, tongueLength);
+
         //Calculate current length of the tongue.
         float length = tongueLength * tongueScale;
 
@@ -207,13 +227,9 @@ public class PlayerController : MonoBehaviour
             tongueEndPosition.transform.localPosition = mouthTransform.localPosition;
         }
 
-        //tongueSprite.transform.localScale = Vector3.one;
-        //tongueSprite.transform.localRotation = Quaternion.identity;
-
         Vector3 scale = tongueSprite.transform.localScale;
         scale.x = length;
         tongueSprite.transform.localScale = scale;
-
 
         if (Input.GetKeyUp(KeyCode.E))
         {
@@ -231,6 +247,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Normalised Tongue Length: " + normalisedTongueLength);
         }
 
+        if (ammoDetailLog)
+        {
+            Debug.Log("Ammo left: " + ammoCount + "/" + (MaxAmmoCount));
+        }
 
         if (Application.isEditor)
         {
@@ -243,6 +263,44 @@ public class PlayerController : MonoBehaviour
             {
                 RemoveBubble(1);
             }
+
+            if (Input.GetKeyDown("k"))
+            {
+                AddAmmo(1);
+            }
+
+            if (Input.GetKeyDown("l"))
+            {
+                RemoveAmmo(1);
+            }
+        }
+
+        crosshairSprite.transform.position = Input.mousePosition;
+
+        if (ammoCount > 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                crosshairSprite.SetActive(true);
+            }
+
+            if(Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                crosshairSprite.SetActive(false);
+                FireBullet(Vector2.left);
+            }
+        }
+    }
+
+    private void FireBullet(Vector2 direction)
+    { 
+        GameObject bullet = Instantiate(bulletPrefab);
+        if(bullet != null)
+        {
+            bullet.transform.position = mouthTransform.position;
+            Vector2 fireDirection = (Camera.main.ScreenToWorldPoint(crosshairSprite.transform.position) - transform.position).normalized;
+            bullet.GetComponent<Rigidbody2D>().AddForce(fireForceStrength * fireDirection, ForceMode2D.Impulse);
+            RemoveAmmo(1);
         }
     }
 
@@ -253,7 +311,7 @@ public class PlayerController : MonoBehaviour
         bubbleCount += count;
         bubbleCount = Mathf.Clamp(bubbleCount, 0, (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod));
         
-        BubbleUIContainer.AddBubble(bubbleCount - originalCount);
+        HUDUIContainer.AddBubble(bubbleCount - originalCount);
     }
 
     public void RemoveBubble(int count)
@@ -263,7 +321,23 @@ public class PlayerController : MonoBehaviour
         bubbleCount -= count;
         bubbleCount = Mathf.Clamp(bubbleCount, 0, (MaxBubbleCount + PlayerInfo.MaxBubbleCountMod));
 
-        BubbleUIContainer.RemoveBubble(originalCount - bubbleCount);
+        HUDUIContainer.RemoveBubble(originalCount - bubbleCount);
+    }
+
+    public void AddAmmo(int count)
+    {
+        int originalAmmoCount = ammoCount;
+        ammoCount += count;
+        ammoCount = Mathf.Clamp(ammoCount, 0, MaxAmmoCount);
+        HUDUIContainer.AddAmmo(ammoCount - originalAmmoCount); 
+    }
+
+    public void RemoveAmmo(int count)
+    {
+        int originalAmmoCount = ammoCount;
+        ammoCount -= count;
+        ammoCount = Mathf.Clamp(ammoCount, 0, MaxAmmoCount);
+        HUDUIContainer.RemoveAmmo(originalAmmoCount - ammoCount);
     }
 
     public int GetBubbleCount()
@@ -323,10 +397,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "ResetBubble")
+        switch(collider.gameObject.tag)
         {
-            AddBubble(1);
-            Destroy(collider.gameObject);
+            case "ResetBubble":
+            {
+                AddBubble(1);
+                Destroy(collider.gameObject);
+            }
+            break;
+
+            case "FlyPickup":
+            {
+                AddAmmo(1);
+                Destroy(collider.gameObject);
+            }
+            break;
+
+            default:
+                break;
+
         }
     }
 

@@ -18,6 +18,12 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     GameObject BubbleUIElementToSpawn;
 
+    [SerializeField]
+    GameObject AmmoParentUIElement;
+
+    [SerializeField]
+    GameObject AmmoUIElementToSpawn;
+
     int lastUpdatedBubbleCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,6 +54,27 @@ public class UiManager : MonoBehaviour
         for (int i = 0; i < count; ++i)
         {
             GameObject go = BubbleParentUIElement.transform.GetChild(0).gameObject;
+            if (go)
+            {
+                Destroy(go);
+            }
+        }
+    }
+
+    public void AddAmmo(int count)
+    {
+        for (int i = 0; i < count; ++i)
+        {
+            GameObject newAmmo = Instantiate(AmmoUIElementToSpawn, AmmoParentUIElement.transform);
+            newAmmo.transform.parent = AmmoParentUIElement.transform;
+        }
+    }
+
+    public void RemoveAmmo(int count)
+    {
+        for (int i = 0; i < count; ++i)
+        {
+            GameObject go = AmmoParentUIElement.transform.GetChild(0).gameObject;
             if (go)
             {
                 Destroy(go);

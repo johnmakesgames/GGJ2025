@@ -301,6 +301,7 @@ MonoBehaviour:
   bubbleForceMultiplier: 1000
   BubbleRechargeTimeSeconds: 10
   PlayerInfo: {fileID: 0}
+  crosshairSprite: {fileID: 0}
   TongueLengthCurve:
     serializedVersion: 2
     m_Curve:
@@ -342,6 +343,7 @@ MonoBehaviour:
   tongueSprite: {fileID: 6373957234125653586}
   bubbleDetailLog: 0
   tongueDetailLog: 0
+  ammoDetailLog: 1
 --- !u!114 &3353387313573173348
 MonoBehaviour:
   m_ObjectHideFlags: 0
