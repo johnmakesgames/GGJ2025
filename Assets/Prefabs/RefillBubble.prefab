@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6483818927985287231}
   - component: {fileID: -3789659140652616469}
   - component: {fileID: 8476646329277643110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RefillBubble
   m_TagString: ResetBubble
   m_Icon: {fileID: 0}
