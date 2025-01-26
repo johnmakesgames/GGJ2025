@@ -85,4 +85,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
+
+    public void OnDeleteSavePressed()
+    {
+        stats.ClearSaveData();
+        PopulateStatsScreen();
+    }
 }
