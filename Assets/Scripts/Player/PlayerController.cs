@@ -106,6 +106,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool tongueDetailLog;
     [SerializeField] private bool ammoDetailLog;
 
+    [Header("Audio")]
+    public AudioSource AudioSoundPlayer;
+    public AudioClip bubblePop;
+    public AudioClip bubbleBlow;
+    public AudioClip ribbit;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -119,6 +126,11 @@ public class PlayerController : MonoBehaviour
         PlayerInfo = GetComponent<PlayerStats>();
         PlayerInfo.LoadStats();
         HUDUIContainer = GameObject.FindGameObjectWithTag("BubbleUIContainer").GetComponent<UiManager>();
+
+        AudioSoundPlayer = GetComponent<AudioSource>();
+        bubblePop.LoadAudioData();
+        bubbleBlow.LoadAudioData();
+        ribbit.LoadAudioData();
 
         for (int i = 0; i < startingAmmoCount; i++)
         {
@@ -141,6 +153,8 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab);
         if(bullet != null)
         {
+            AudioSoundPlayer.PlayOneShot(ribbit);
+
             bullet.transform.position = mouthTransform.position;
             Vector2 fireDirection = (Camera.main.ScreenToWorldPoint(crosshairSprite.transform.position) - transform.position).normalized;
             bullet.GetComponent<Rigidbody2D>().AddForce(fireForceStrength * fireDirection, ForceMode2D.Impulse);
@@ -160,6 +174,10 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveBubble(int count)
     {
+        AudioSoundPlayer.Stop();
+
+        AudioSoundPlayer.PlayOneShot(bubblePop);
+
         int originalCount = bubbleCount;
 
         bubbleCount -= count;
@@ -388,6 +406,11 @@ public class PlayerController : MonoBehaviour
             {
                 //Inflating Bubble based on curve value + scaling.
                 bubbleSize += (animationCurve.Evaluate(normalisedBubbleSize) * (inflatingSpeedScale + PlayerInfo.InflatingSpeedMod) * Time.deltaTime);
+
+                if(!AudioSoundPlayer.isPlaying)
+                {
+                    AudioSoundPlayer.PlayOneShot(bubbleBlow);
+                }
 
                 //If it goes too big, pop it.
                 if (normalisedBubbleSize >= 1)
