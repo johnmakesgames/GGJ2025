@@ -455,14 +455,14 @@ public class PlayerController : MonoBehaviour
         {
             isTongueExtended = true;
             canExtendTongue = false;
-            tongueGoingRight = isFacingRight;
+            tongueGoingRight = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && canExtendTongue)
         {
             isTongueExtended = true;
             canExtendTongue = false;
-            tongueGoingRight = isFacingRight;
+            tongueGoingRight = false;
         }
 
         float normalisedTongueLength = tongueLength / maxTongueLength;
