@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 8faa3543b1043cd42822a79791e5c43d
+guid: e2755b072c89e9d43a737ded800924c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2820143329777312509
-    second: Frog_0
-  - first:
-      213: -1081280975163990012
-    second: Frog_1
+      213: -427066485589525634
+    second: Fly_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,67 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Frog_0
+      name: Fly_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
+        x: 1
+        y: 5
+        width: 31
+        height: 26
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: df2601baa69232720800000000000000
-      internalID: 2820143329777312509
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Frog_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 40066f49ea48ef0f0800000000000000
-      internalID: -1081280975163990012
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Frog_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd8045aa2f931d5409e6a1991e7df421
-      internalID: -644705729
+      spriteID: e7b36f64b41c21af0800000000000000
+      internalID: -427066485589525634
       vertices: []
       indices: 
       edges: []
@@ -172,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3978c169e4beb29409f95a7a5fa270a4
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -182,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Frog_0: 2820143329777312509
-      Frog_1: -1081280975163990012
-      Frog_2: -644705729
+      Fly_0: -427066485589525634
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
