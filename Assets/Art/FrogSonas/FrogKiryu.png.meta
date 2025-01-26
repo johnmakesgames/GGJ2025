@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FrogKiryu_0: -1996570801830105546
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
