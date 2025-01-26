@@ -33,9 +33,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform leftFootTransform;
     [SerializeField]
+    private Transform centreFootTransform;
+    [SerializeField]
     private Transform rightFootTransform;
     [SerializeField]
     private float groundCheckDistance;
+    [SerializeField]
+    private float centreCheckScale;
 
 
     [Space(10)]
@@ -94,7 +98,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float maxTongueLength;
     [SerializeField]
-    private float tongueScale;
+    private float tongueScaleX;
+    [SerializeField]
+    private float tongueScaleY;
     [SerializeField]
     private Transform mouthTransform;
     [SerializeField]
@@ -231,9 +237,9 @@ public class PlayerController : MonoBehaviour
         return rotated.normalized * targetMagnitude;
     }
 
-    private bool CheckForGroundHit(Vector2 origin, Vector2 direction)
+    private bool CheckForGroundHit(Vector2 origin, Vector2 direction, float length)
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, groundCheckDistance);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, length);
 
         for (int i = 0; i < hits.Length; i++)
         {
@@ -260,14 +266,27 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 leftOrigin = new Vector2(leftFootTransform.position.x, leftFootTransform.position.y);
         Vector2 leftDirection = new Vector2(-leftFootTransform.up.x, -leftFootTransform.up.y).normalized;
+        bool leftFootHit = CheckForGroundHit(leftOrigin, leftDirection, groundCheckDistance);
 
-        bool leftFootHit = CheckForGroundHit(leftOrigin, leftDirection);
+        Vector2 centreOrigin = new Vector2(centreFootTransform.position.x, centreFootTransform.position.y);
+        Vector2 centreDirection = new Vector2(-centreFootTransform.up.x, -centreFootTransform.up.y).normalized;
+        bool centreFootHit = CheckForGroundHit(centreOrigin, centreDirection, groundCheckDistance * centreCheckScale);
 
         Vector2 rightOrigin = new Vector2(rightFootTransform.position.x, rightFootTransform.position.y);
         Vector2 rightDirection = new Vector2(-rightFootTransform.up.x, -rightFootTransform.up.y).normalized;
-        bool rightFootHit = CheckForGroundHit(rightOrigin, rightDirection);
+        bool rightFootHit = CheckForGroundHit(rightOrigin, rightDirection, groundCheckDistance);
 
-        if (leftFootHit && rightFootHit)
+        int hitCount = 0;
+        if (leftFootHit)
+            hitCount++;
+
+        if (centreFootHit)
+            hitCount++;
+
+        if (rightFootHit)
+            hitCount++;
+
+        if (leftFootHit && rightFootHit && centreFootHit)
         {
             rigidbody.freezeRotation = true;
             CanRotate = true;
@@ -502,7 +521,7 @@ public class PlayerController : MonoBehaviour
         tongueLength = Mathf.Max(0, tongueLength);
 
         //Calculate current length of the tongue.
-        float length = tongueLength * tongueScale;
+        float length = tongueLength * tongueScaleX;
 
         if (length > 0)
         {
@@ -521,7 +540,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 scale = tongueSprite.transform.localScale;
         scale.x = length;
-        scale.y = length / 5.0f;
+        scale.y = length * tongueScaleY;
         tongueSprite.transform.localScale = scale;
 
         if (Input.GetKeyUp(KeyCode.E))
@@ -639,6 +658,9 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = new Vector2(-leftFootTransform.up.x, -leftFootTransform.up.y).normalized;
         Gizmos.DrawLine(origin, origin + (dir * groundCheckDistance));
 
+        origin = new Vector2(centreFootTransform.position.x, centreFootTransform.position.y);
+        dir = new Vector2(-centreFootTransform.up.x, -centreFootTransform.up.y).normalized;
+        Gizmos.DrawLine(origin, origin + (dir * groundCheckDistance * centreCheckScale));
 
         origin = new Vector2(rightFootTransform.position.x, rightFootTransform.position.y);
         dir = new Vector2(-rightFootTransform.up.x, -rightFootTransform.up.y).normalized;
