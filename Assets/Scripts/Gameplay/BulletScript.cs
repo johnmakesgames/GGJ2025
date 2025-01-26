@@ -22,6 +22,12 @@ public class BulletScript : MonoBehaviour
             return;
         }
 
+        EnemyStats stats = collision.gameObject.GetComponent<EnemyStats>();
+        if (stats)
+        {
+            stats.DealDamage(1);
+        }
+
         Destroy(this.gameObject);
     }
 
