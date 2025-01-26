@@ -6,6 +6,16 @@ public class BirdFollowPlayer : MonoBehaviour
     private bool isActive;
     float movementSpeed;
 
+    public AudioSource cawPlayer;
+    public AudioClip cawClip;
+
+    private void Start()
+    {
+        cawPlayer = GetComponent<AudioSource>();
+
+        cawClip.LoadAudioData();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -17,6 +27,12 @@ public class BirdFollowPlayer : MonoBehaviour
             this.transform.position += dir * movementSpeed * Time.deltaTime;
 
             movementSpeed += Time.deltaTime;
+
+            if(!cawPlayer.isPlaying)
+            {
+                cawPlayer.PlayOneShot(cawClip);
+
+            }
         }
     }
 
@@ -24,6 +40,8 @@ public class BirdFollowPlayer : MonoBehaviour
     {
         this.player = player;
         isActive = true;
+
+        cawPlayer.PlayOneShot(cawClip);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

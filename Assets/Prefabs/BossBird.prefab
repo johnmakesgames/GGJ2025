@@ -132,12 +132,12 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 9bbf2b266c333b24dacc6b0d566d671f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9bbf2b266c333b24dacc6b0d566d671f, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -231,6 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ce8171404bee04b9c7a3dfde4e680e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cawPlayer: {fileID: 305403337577564279}
+  cawClip: {fileID: 8300000, guid: 9bbf2b266c333b24dacc6b0d566d671f, type: 3}
 --- !u!60 &5003844657342371549
 PolygonCollider2D:
   m_ObjectHideFlags: 0
