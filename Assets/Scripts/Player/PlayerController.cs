@@ -221,9 +221,9 @@ public class PlayerController : MonoBehaviour
             if (hit.collider != null)
             {
                 // Refill to max bubbles when the player lands.
-                if (hit.collider.gameObject.CompareTag("JohnTestGround"))
+;                if (hit.collider.gameObject.CompareTag("JohnTestGround"))
                 {
-                    if (hit.collider.gameObject.transform.position.y < this.transform.position.y)
+                    if (hit.point.y < this.transform.position.y)
                     {
                         return true;
                     }

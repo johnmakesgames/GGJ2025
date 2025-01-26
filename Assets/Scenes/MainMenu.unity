@@ -4652,13 +4652,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SettingsMenu: {fileID: 1782488903}
   CreditsPanel: {fileID: 2011159904}
-  SceneToLoadOnPlay: PlayTestLevel
+  SceneToLoadOnPlay: FinalLevel
   FurthestPercentText: {fileID: 136413670}
   MostRecentPercentText: {fileID: 4531451}
   MoneyText: {fileID: 774252980}
   MaxBubbleCountModText: {fileID: 1176969212}
   MaxBubbleSizeModText: {fileID: 1816767074}
-  MaxFlyCountModText: {fileID: 0}
+  MaxFlyCountModText: {fileID: 314143539}
   TimeTakenToCompleteText: {fileID: 1381376903}
   TotalMoneySpent: {fileID: 487410417}
 --- !u!114 &1040768445
