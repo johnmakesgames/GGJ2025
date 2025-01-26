@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
 
     private bool grounded;
 
+    [SerializeField]
+    Animator spriteAnimator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -91,6 +94,8 @@ public class PlayerController : MonoBehaviour
                     timeSinceInput = Mathf.Min(timeSinceInput, 0.0f);
                     waitingForBubbleKeyLift = true;
                 }
+
+                spriteAnimator.SetBool("BlowingBubble", true);
             }
         }
 
@@ -100,6 +105,7 @@ public class PlayerController : MonoBehaviour
             bubbleSize = 0;
             timeSinceInput = Mathf.Min(timeSinceInput, 0);
             waitingForBubbleKeyLift = false;
+            spriteAnimator.SetBool("BlowingBubble", false);
             RemoveBubble(1);
         }
 
@@ -233,6 +239,20 @@ public class PlayerController : MonoBehaviour
             if (collision.transform.position.y < this.transform.position.y)
             {
                 grounded = true;
+                spriteAnimator.SetBool("Grounded", true);
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Refill to max bubbles when the player lands.
+        if (collision.gameObject.CompareTag("JohnTestGround"))
+        {
+            if (collision.transform.position.y < this.transform.position.y)
+            {
+                grounded = true;
+                spriteAnimator.SetBool("Grounded", false);
             }
         }
     }

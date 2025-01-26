@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 4162536359276438479}
   - component: {fileID: 5465852720149330108}
   - component: {fileID: 3353387313573173348}
+  - component: {fileID: 5726491424610452270}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -298,6 +299,7 @@ MonoBehaviour:
   bubbleForceMultiplier: 1000
   BubbleRechargeTimeSeconds: 10
   PlayerInfo: {fileID: 0}
+  spriteAnimator: {fileID: 5726491424610452270}
 --- !u!114 &3353387313573173348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +318,37 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
+  distanceThroughLevel: 0
+  furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
+  TotalMoneySpent: 0
+--- !u!95 &5726491424610452270
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023145184745122027}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c97854020d005a64bba3bc3ca55d2949, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3407241531603146687
 GameObject:
   m_ObjectHideFlags: 0
