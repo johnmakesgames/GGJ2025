@@ -103,11 +103,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
-  Money: 100
+  Money: 10
   MaxBubbleCountMod: 0
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  MaxFlyCountMod: 0
+  appliesMaterialChange: 0
+  DefaultMaterial: {fileID: 0}
+  ChangedMaterial: {fileID: 0}
+  distanceThroughLevel: 0
+  furthestDistanceThroughLevel: 0
+  lastDistanceThroughLevel: 0
+  FastestTimeTakenToComplete: -1
+  TimeSinceStart: -1
+  TotalMoneySpent: 0
 --- !u!114 &487766099265547568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f095bd64ebea5cc4c8b561326d9e19d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temporary: 0
+  temporaryDuration: 0
 --- !u!58 &8132591211058307875
 CircleCollider2D:
   m_ObjectHideFlags: 0

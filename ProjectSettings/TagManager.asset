@@ -10,6 +10,7 @@ TagManager:
   - ShopUI
   - Wall
   - FlyPickup
+  - Crosshair
   layers:
   - Default
   - TransparentFX
