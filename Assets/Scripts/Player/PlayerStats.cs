@@ -98,6 +98,17 @@ public class PlayerStats : MonoBehaviour
 
     static readonly string savePath = Path.Combine(Environment.CurrentDirectory, $"GameProgressSave.frgSave");
     static readonly int loadableVersion = 3;
+
+    public void ClearSaveData()
+    {
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+        }
+
+        this.LoadStats();
+    }
+
     public void LoadStats()
     {
         if (File.Exists(savePath))
