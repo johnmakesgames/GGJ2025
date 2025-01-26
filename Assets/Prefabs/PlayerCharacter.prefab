@@ -391,7 +391,7 @@ MonoBehaviour:
   AudioSoundPlayer: {fileID: 2994243770665202169}
   bubblePop: {fileID: 8300000, guid: 6225073c4a76c82469d9ce52dff4d8ef, type: 3}
   bubbleBlow: {fileID: 8300000, guid: 1b0d6ca39f3fd5e45a35656076d5d7fa, type: 3}
-  ribbit: {fileID: 8300000, guid: 6225073c4a76c82469d9ce52dff4d8ef, type: 3}
+  ribbit: {fileID: 8300000, guid: edd71248013f4804e9a560b939046dca, type: 3}
 --- !u!114 &3353387313573173348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +410,7 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  MaxFlyCountMod: 0
   appliesMaterialChange: 0
   DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   ChangedMaterial: {fileID: 0}

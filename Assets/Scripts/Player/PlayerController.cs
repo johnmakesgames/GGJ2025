@@ -153,6 +153,8 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab);
         if(bullet != null)
         {
+            AudioSoundPlayer.PlayOneShot(ribbit);
+
             bullet.transform.position = mouthTransform.position;
             Vector2 fireDirection = (Camera.main.ScreenToWorldPoint(crosshairSprite.transform.position) - transform.position).normalized;
             bullet.GetComponent<Rigidbody2D>().AddForce(fireForceStrength * fireDirection, ForceMode2D.Impulse);
@@ -172,6 +174,8 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveBubble(int count)
     {
+        AudioSoundPlayer.Stop();
+
         AudioSoundPlayer.PlayOneShot(bubblePop);
 
         int originalCount = bubbleCount;
@@ -403,9 +407,10 @@ public class PlayerController : MonoBehaviour
                 //Inflating Bubble based on curve value + scaling.
                 bubbleSize += (animationCurve.Evaluate(normalisedBubbleSize) * (inflatingSpeedScale + PlayerInfo.InflatingSpeedMod) * Time.deltaTime);
 
-                //AudioSoundPlayer.PlayOneShot(bubbleBlow);
-                AudioSoundPlayer.Play();
-                Console.WriteLine("audio PLAY");
+                if(!AudioSoundPlayer.isPlaying)
+                {
+                    AudioSoundPlayer.PlayOneShot(bubbleBlow);
+                }
 
                 //If it goes too big, pop it.
                 if (normalisedBubbleSize >= 1)
