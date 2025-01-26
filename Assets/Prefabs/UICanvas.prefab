@@ -391,6 +391,7 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  MaxFlyCountMod: 0
   appliesMaterialChange: 0
   DefaultMaterial: {fileID: 0}
   ChangedMaterial: {fileID: 0}
@@ -557,6 +558,7 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  MaxFlyCountMod: 0
   appliesMaterialChange: 0
   DefaultMaterial: {fileID: 0}
   ChangedMaterial: {fileID: 0}
@@ -758,6 +760,7 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: 0
   InflatingSpeedMod: 0
+  MaxFlyCountMod: 0
   appliesMaterialChange: 0
   DefaultMaterial: {fileID: 0}
   ChangedMaterial: {fileID: 0}
@@ -1756,7 +1759,7 @@ GameObject:
   - component: {fileID: 5204837426362700753}
   m_Layer: 5
   m_Name: Crosshair
-  m_TagString: Untagged
+  m_TagString: Crosshair
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1808,7 +1811,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2852443166016097488, guid: 591dac32456371844b989637b2152903, type: 3}
+  m_Sprite: {fileID: 8626118094533771178, guid: 9871d7cea0aa28d4697723b250cae349, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1883,7 +1886,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5682809686868360691, guid: f67169adc1e747c4b979849d5e3b0168, type: 3}
+  m_Sprite: {fileID: 3906104238461325921, guid: ebf66e011e2767345af4678c133993ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2236,6 +2239,7 @@ MonoBehaviour:
   MaxBubbleSizeMod: 0
   BubbleRechargeTimeMod: -1
   InflatingSpeedMod: 0
+  MaxFlyCountMod: 0
   appliesMaterialChange: 0
   DefaultMaterial: {fileID: 0}
   ChangedMaterial: {fileID: 0}
@@ -2394,8 +2398,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278201087
-  m_fontColor: {r: 1, g: 0.16554402, b: 0, a: 1}
+    rgba: 4285911568
+  m_fontColor: {r: 0.0627451, g: 0.8235295, b: 0.45882356, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2726,14 +2730,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.77521867, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7483058075453410329, guid: af00ed5f5dd7bd74eb9dcb9f930603d4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3028,14 +3032,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3906104238461325921, guid: ebf66e011e2767345af4678c133993ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

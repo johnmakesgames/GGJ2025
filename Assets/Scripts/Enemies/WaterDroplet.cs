@@ -29,11 +29,6 @@ public class WaterDroplet : MonoBehaviour
     {
         if (collision.transform.position.y < this.transform.position.y)
         {
-            if (collision.gameObject.CompareTag("JohnTestGround"))
-            {
-                Destroy(this.gameObject);
-            }
-
             if (collision.gameObject.CompareTag("Player"))
             {
                 var stats = collision.gameObject.GetComponent<PlayerStats>();
@@ -42,8 +37,10 @@ public class WaterDroplet : MonoBehaviour
                     stats.Health -= this.stats.GetDamageFromEnemy();
                 }
 
-                Destroy(this.gameObject);
             }
+
+            Destroy(this.gameObject);
+
         }
     }
 }

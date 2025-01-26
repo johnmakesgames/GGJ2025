@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
     TextMeshProUGUI MaxBubbleSizeModText;
 
     [SerializeField]
-    TextMeshProUGUI InflatingSpeedModText;
+    TextMeshProUGUI MaxFlyCountModText;
 
     [SerializeField]
     TextMeshProUGUI TimeTakenToCompleteText;
@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
         MoneyText.text = stats.Money.ToString();
         MaxBubbleCountModText.text = stats.MaxBubbleCountMod.ToString();
         MaxBubbleSizeModText.text = stats.MaxBubbleSizeMod.ToString();
-        InflatingSpeedModText.text = stats.InflatingSpeedMod.ToString();
+        MaxFlyCountModText.text = stats.MaxFlyCountMod.ToString();
         TimeTakenToCompleteText.text = (stats.FastestTimeTakenToComplete != -1) ? $"{stats.FastestTimeTakenToComplete.ToString()} Seconds" : "Never Completed";
         TotalMoneySpent.text = stats.TotalMoneySpent.ToString();
     }

@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     private float BubbleRechargeTimer = 0.0f;
 
     public float MaxBubbleSize { get; set; } = 2.5f;
-    public int MaxBubbleCount { get; set; } = 5;
+    public int MaxBubbleCount { get; set; } = 3;
     private int bubbleCount { get; set; }
 
     private bool waitingForBubbleKeyLift;
@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     [SerializeField]
     Animator spriteAnimator;
+    private SpriteRenderer spriteRenderer;
 
     [Space(10)]
     [Header("Shooting")]
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
     private int fireForceStrength;
     [SerializeField]
     private int startingAmmoCount;
-    public int MaxAmmoCount { get; set; } = 5;
+    public int MaxAmmoCount { get; set; } = 3;
     private int ammoCount { get; set; }
     private bool canExtendTongue;
     private bool tongueGoingRight = false;
@@ -100,11 +101,19 @@ public class PlayerController : MonoBehaviour
     private Transform tongueEndPosition;
     [SerializeField]
     private GameObject tongueSprite;
+    public bool InShop;
 
     [Header("Debugs")]
     [SerializeField] private bool bubbleDetailLog;
     [SerializeField] private bool tongueDetailLog;
     [SerializeField] private bool ammoDetailLog;
+
+    [Header("Audio")]
+    public AudioSource AudioSoundPlayer;
+    public AudioClip bubblePop;
+    public AudioClip bubbleBlow;
+    public AudioClip ribbit;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -113,12 +122,19 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         bubbleSize = 0;
         ammoCount = 0;
-        bubbleCount = 3;
+        bubbleCount = MaxBubbleCount;
         waitingForBubbleKeyLift = false;
         BubbleRechargeTimer = 0.0f;
         PlayerInfo = GetComponent<PlayerStats>();
         PlayerInfo.LoadStats();
         HUDUIContainer = GameObject.FindGameObjectWithTag("BubbleUIContainer").GetComponent<UiManager>();
+
+        AudioSoundPlayer = GetComponent<AudioSource>();
+        bubblePop.LoadAudioData();
+        bubbleBlow.LoadAudioData();
+        ribbit.LoadAudioData();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         for (int i = 0; i < startingAmmoCount; i++)
         {
@@ -141,6 +157,8 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab);
         if(bullet != null)
         {
+            AudioSoundPlayer.PlayOneShot(ribbit);
+
             bullet.transform.position = mouthTransform.position;
             Vector2 fireDirection = (Camera.main.ScreenToWorldPoint(crosshairSprite.transform.position) - transform.position).normalized;
             bullet.GetComponent<Rigidbody2D>().AddForce(fireForceStrength * fireDirection, ForceMode2D.Impulse);
@@ -160,6 +178,10 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveBubble(int count)
     {
+        AudioSoundPlayer.Stop();
+
+        AudioSoundPlayer.PlayOneShot(bubblePop);
+
         int originalCount = bubbleCount;
 
         bubbleCount -= count;
@@ -172,7 +194,7 @@ public class PlayerController : MonoBehaviour
     {
         int originalAmmoCount = ammoCount;
         ammoCount += count;
-        ammoCount = Mathf.Clamp(ammoCount, 0, MaxAmmoCount);
+        ammoCount = Mathf.Clamp(ammoCount, 0, (MaxAmmoCount + PlayerInfo.MaxFlyCountMod));
         HUDUIContainer.AddAmmo(ammoCount - originalAmmoCount); 
     }
 
@@ -180,7 +202,7 @@ public class PlayerController : MonoBehaviour
     {
         int originalAmmoCount = ammoCount;
         ammoCount -= count;
-        ammoCount = Mathf.Clamp(ammoCount, 0, MaxAmmoCount);
+        ammoCount = Mathf.Clamp(ammoCount, 0, (MaxAmmoCount + PlayerInfo.MaxFlyCountMod));
         HUDUIContainer.RemoveAmmo(originalAmmoCount - ammoCount);
     }
 
@@ -221,9 +243,9 @@ public class PlayerController : MonoBehaviour
             if (hit.collider != null)
             {
                 // Refill to max bubbles when the player lands.
-                if (hit.collider.gameObject.CompareTag("JohnTestGround"))
+;                if (hit.collider.gameObject.CompareTag("JohnTestGround"))
                 {
-                    if (hit.collider.gameObject.transform.position.y < this.transform.position.y)
+                    if (hit.point.y < this.transform.position.y)
                     {
                         return true;
                     }
@@ -331,6 +353,19 @@ public class PlayerController : MonoBehaviour
         spriteAnimator.SetBool("IsWalking", isWalking);
         spriteAnimator.SetBool("IsFacingRight", isFacingRight);
 
+        //if (!isFacingRight)
+        //{
+        //    this.transform.localScale = new Vector3(-1, 1, 1);
+        //    spriteRenderer.flipX = false;
+        //}
+        //else
+        //{
+        //    this.transform.localScale = new Vector3(1, 1, 1);
+        //    spriteRenderer.flipX = false;
+        //}
+
+        spriteRenderer.flipX = !isFacingRight;
+
         ApplyMovement();
 
         if (isGrounded)
@@ -379,6 +414,11 @@ public class PlayerController : MonoBehaviour
             {
                 //Inflating Bubble based on curve value + scaling.
                 bubbleSize += (animationCurve.Evaluate(normalisedBubbleSize) * (inflatingSpeedScale + PlayerInfo.InflatingSpeedMod) * Time.deltaTime);
+
+                if(!AudioSoundPlayer.isPlaying)
+                {
+                    AudioSoundPlayer.PlayOneShot(bubbleBlow);
+                }
 
                 //If it goes too big, pop it.
                 if (normalisedBubbleSize >= 1)
@@ -500,7 +540,7 @@ public class PlayerController : MonoBehaviour
         //Update crosshair position.
         crosshairSprite.transform.position = Input.mousePosition;
 
-        if (ammoCount > 0)
+        if (ammoCount > 0 && !InShop)
         {
             //Show crosshair while we are aiming.
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -546,7 +586,7 @@ public class PlayerController : MonoBehaviour
 
         if (ammoDetailLog)
         {
-            Debug.Log("Ammo left: " + ammoCount + "/" + (MaxAmmoCount));
+            Debug.Log("Ammo left: " + ammoCount + "/" + ((MaxAmmoCount + PlayerInfo.MaxFlyCountMod)));
         }
 
         if (Input.GetKeyDown("o"))

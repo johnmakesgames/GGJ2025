@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 99
-  Damage: 1000
+  Damage: 3
   knockdownForce: 0
   stunDuration: 0
 --- !u!114 &4403638804186616188

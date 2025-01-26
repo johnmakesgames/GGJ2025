@@ -12,6 +12,7 @@ public class PlayerStats : MonoBehaviour
     public float MaxBubbleSizeMod = 0;
     public float BubbleRechargeTimeMod = 0;
     public float InflatingSpeedMod = 0;
+    public int MaxFlyCountMod = 0;
 
 
     public bool appliesMaterialChange = false;
@@ -46,6 +47,7 @@ public class PlayerStats : MonoBehaviour
         MaxBubbleSizeMod += otherStats.MaxBubbleSizeMod;
         BubbleRechargeTimeMod += otherStats.BubbleRechargeTimeMod;
         InflatingSpeedMod += otherStats.InflatingSpeedMod;
+        MaxFlyCountMod += otherStats.MaxFlyCountMod;
 
         if (otherStats.appliesMaterialChange && !appliesMaterialChange)
         {
@@ -66,6 +68,7 @@ public class PlayerStats : MonoBehaviour
         MaxBubbleSizeMod -= otherStats.MaxBubbleSizeMod;
         BubbleRechargeTimeMod -= otherStats.BubbleRechargeTimeMod;
         InflatingSpeedMod -= otherStats.InflatingSpeedMod;
+        MaxFlyCountMod -= otherStats.MaxFlyCountMod;
 
         if (otherStats.appliesMaterialChange)
         {
@@ -86,6 +89,7 @@ public class PlayerStats : MonoBehaviour
         MaxBubbleSizeMod = otherStats.MaxBubbleSizeMod;
         BubbleRechargeTimeMod = otherStats.BubbleRechargeTimeMod;
         InflatingSpeedMod = otherStats.InflatingSpeedMod;
+        MaxFlyCountMod = otherStats.MaxFlyCountMod;
         appliesMaterialChange = otherStats.appliesMaterialChange;
         DefaultMaterial = otherStats.DefaultMaterial;
         ChangedMaterial = otherStats.ChangedMaterial;
@@ -149,9 +153,9 @@ public class PlayerStats : MonoBehaviour
                     MaxBubbleSizeMod = 0;
                 }
 
-                if (!float.TryParse(saveData[6], out InflatingSpeedMod))
+                if (!int.TryParse(saveData[6], out MaxFlyCountMod))
                 {
-                    InflatingSpeedMod = 0;
+                    MaxFlyCountMod = 0;
                 }
 
                 if (!float.TryParse(saveData[7], out FastestTimeTakenToComplete))
@@ -199,9 +203,19 @@ public class PlayerStats : MonoBehaviour
                 sw.WriteLine(Money);
                 sw.WriteLine(MaxBubbleCountMod);
                 sw.WriteLine(MaxBubbleSizeMod);
-                sw.WriteLine(InflatingSpeedMod);
+                sw.WriteLine(MaxFlyCountMod);
 
-                if (TimeSinceStart < FastestTimeTakenToComplete && distanceThroughLevel == 1)
+                bool isFaster = false;
+                if (TimeSinceStart < FastestTimeTakenToComplete && FastestTimeTakenToComplete != -1)
+                {
+                    isFaster = true;
+                }
+                else if (FastestTimeTakenToComplete == -1)
+                {
+                    isFaster = true;
+                }
+
+                if (isFaster && distanceThroughLevel == 1)
                 {
                     sw.WriteLine(TimeSinceStart);
                 }

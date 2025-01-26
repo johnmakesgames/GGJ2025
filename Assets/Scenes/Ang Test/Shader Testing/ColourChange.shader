@@ -11,6 +11,7 @@ Shader "Unlit/ColourChange"
         {
             Tags { "RenderType" = "Opaque" }
             LOD 100
+            Cull Off
 
             Pass
             {
@@ -39,14 +40,6 @@ Shader "Unlit/ColourChange"
                 float4 _AnimateXY;
                 float4 _ColourMask;
 
-                //float4 _ColourArray[5];
-                //{
-                //    {1, 0, 0, 0},
-                //    {1, 1, 0, 0},
-                //    {0, 1, 0, 0},
-                //    {0, 1, 1, 0},
-                //    {0, 0, 1, 0},
-                //};
 
                 int currentColourIndex = 0;
                 float currentTime = 0;
@@ -58,11 +51,6 @@ Shader "Unlit/ColourChange"
                     o.uv = v.uv;
                     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
-                    //o.uv += frac(_AnimateXY.xy * _MainTexture_ST * _Time.yy); //Time goes funky the longe unity is open
-
-
-                    //o.uv += frac(_AnimateXY.xy * _MainTexture_ST * _Time.yy); //Time goes funky the longe unity is open
-
                     return o;
                 }
 
@@ -70,9 +58,7 @@ Shader "Unlit/ColourChange"
                 {
                     //Increment time
                     currentTime += _Time.y; //(0, 1) exclusive
-                     
-                    //currentTime = cos(currentTime);
-                    
+
                     // sample the texture
                     float2 uv = i.uv;
                     float2 rainbowUV = frac(uv + float2(currentTime, 0))/0.999999999f;
@@ -88,55 +74,10 @@ Shader "Unlit/ColourChange"
 
                     fixed4 rainbowCol = tex2D(_RainbowTexture, rainbowUV);
 
-                    //textCol.xy += frac(_Time.yy);
+
+                    _ColourMask = rainbowCol;
 
 
-                   //
-                   // if (currentTime >= 1)
-                   // {
-                   //     currentColourIndex += 1;
-                   //
-                   //     if (currentColourIndex > 4)
-                   //     {
-                   //         currentColourIndex = 0;
-                   //     }
-                   // }
-
-                    _ColourMask = rainbowCol;//float4(1, 0, 0, 0);// colourArray[currentColourIndex];
-
-
-                    //if (_ColourMask.x >= 0.9)
-                    //{
-                    //    _ColourMask.y += frac(_Time.y);
-                    //    _ColourMask.x = 1.0;
-                    //}
-                    //
-                    //if (_ColourMask.y >= 0.9)
-                    //{
-                    //    _ColourMask.x -= 1;
-                    //    _ColourMask.y = 1.0;
-                    //}
-
-
-                    
-                    //_ColourMask.x -= frac(_Time.y);
-                    //
-                    //_ColourMask.z += frac(_Time.y);
-                    //
-                    //_ColourMask.y -= frac(_Time.y);
-                    //
-                    //_ColourMask.x += frac(_Time.y);
-                    //
-                    //_ColourMask.z -= frac(_Time.y);
-
-
-                    //float4 colourMask = ()
-                    //textCol.w = 0.2;
-                    //textCol.x += frac(_Time.y);
-                    //textCol.y += frac(_Time.y);
-                    //textCol.z += frac(_Time.y);
-
-                    //fixed4 col = fixed4(i.uv, 0, 1);
 
                     textCol += _ColourMask;
 
