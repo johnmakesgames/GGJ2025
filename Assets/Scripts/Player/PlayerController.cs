@@ -460,6 +460,7 @@ public class PlayerController : MonoBehaviour
 
         //Scale a sprite appropriately.
         bubbleSpriteObject.GetComponent<Transform>().localScale = new Vector3(normalisedBubbleSize * 2, normalisedBubbleSize * 2, normalisedBubbleSize * 2);
+        bubbleSpriteObject.transform.localPosition = mouthTransform.localPosition + new Vector3(0.0f, normalisedBubbleSize, 0.0f);
     }
 
     private void ProcessTongueControls()
