@@ -205,7 +205,17 @@ public class PlayerStats : MonoBehaviour
                 sw.WriteLine(MaxBubbleSizeMod);
                 sw.WriteLine(MaxFlyCountMod);
 
-                if (TimeSinceStart < FastestTimeTakenToComplete && distanceThroughLevel == 1)
+                bool isFaster = false;
+                if (TimeSinceStart < FastestTimeTakenToComplete && FastestTimeTakenToComplete != -1)
+                {
+                    isFaster = true;
+                }
+                else if (FastestTimeTakenToComplete == -1)
+                {
+                    isFaster = true;
+                }
+
+                if (isFaster && distanceThroughLevel == 1)
                 {
                     sw.WriteLine(TimeSinceStart);
                 }

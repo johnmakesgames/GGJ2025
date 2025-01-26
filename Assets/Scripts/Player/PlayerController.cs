@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     [SerializeField]
     Animator spriteAnimator;
+    private SpriteRenderer spriteRenderer;
 
     [Space(10)]
     [Header("Shooting")]
@@ -132,6 +133,8 @@ public class PlayerController : MonoBehaviour
         bubblePop.LoadAudioData();
         bubbleBlow.LoadAudioData();
         ribbit.LoadAudioData();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         for (int i = 0; i < startingAmmoCount; i++)
         {
@@ -350,14 +353,18 @@ public class PlayerController : MonoBehaviour
         spriteAnimator.SetBool("IsWalking", isWalking);
         spriteAnimator.SetBool("IsFacingRight", isFacingRight);
 
-        if (!isFacingRight)
-        {
-            this.transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else
-        {
-            this.transform.localScale = new Vector3(1, 1, 1);
-        }
+        //if (!isFacingRight)
+        //{
+        //    this.transform.localScale = new Vector3(-1, 1, 1);
+        //    spriteRenderer.flipX = false;
+        //}
+        //else
+        //{
+        //    this.transform.localScale = new Vector3(1, 1, 1);
+        //    spriteRenderer.flipX = false;
+        //}
+
+        spriteRenderer.flipX = !isFacingRight;
 
         ApplyMovement();
 
@@ -455,7 +462,7 @@ public class PlayerController : MonoBehaviour
         {
             isTongueExtended = true;
             canExtendTongue = false;
-            tongueGoingRight = !isFacingRight;
+            tongueGoingRight = isFacingRight;
         }
 
         float normalisedTongueLength = tongueLength / maxTongueLength;
