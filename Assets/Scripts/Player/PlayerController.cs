@@ -331,6 +331,15 @@ public class PlayerController : MonoBehaviour
         spriteAnimator.SetBool("IsWalking", isWalking);
         spriteAnimator.SetBool("IsFacingRight", isFacingRight);
 
+        if (!isFacingRight)
+        {
+            this.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            this.transform.localScale = new Vector3(1, 1, 1);
+        }
+
         ApplyMovement();
 
         if (isGrounded)
