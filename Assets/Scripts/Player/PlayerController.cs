@@ -43,11 +43,6 @@ public class PlayerController : MonoBehaviour
     public int MaxBubbleCount { get; set; } = 5;
     private int bubbleCount { get; set; }
 
-    [SerializeField]
-    private int startingAmmoCount;
-    public int MaxAmmoCount { get; set; } = 5;
-    private int ammoCount { get; set; }
-
     private bool waitingForBubbleKeyLift;
 
     [HideInInspector] public PlayerStats PlayerInfo;
@@ -58,15 +53,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Animator spriteAnimator;
 
-    [SerializeField] 
-    private GameObject crosshairSprite;
 
     [Space(10)]
     [Header("Shooting")]
     [SerializeField]
+    private GameObject crosshairSprite;
+    [SerializeField]
     GameObject bulletPrefab;
     [SerializeField]
     private int fireForceStrength;
+    [SerializeField]
+    private int startingAmmoCount;
+    public int MaxAmmoCount { get; set; } = 5;
+    private int ammoCount { get; set; }
     private bool canExtendTongue;
     private bool tongueGoingRight = false;
     private bool isTongueExtended = false;
@@ -108,6 +107,16 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < startingAmmoCount; i++)
         {
             AddAmmo(1);
+        }
+
+        if(crosshairSprite == null)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                Debug.Log("Need to set the inspector value for crosshairSprite in the PlayerController script to be the crosshair provided under the UICanvas prefab.");
+            }
+
+            Application.Quit();
         }
     }
 
