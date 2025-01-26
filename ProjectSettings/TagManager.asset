@@ -6,6 +6,10 @@ TagManager:
   tags:
   - ResetBubble
   - JohnTestGround
+  - BubbleUIContainer
+  - ShopUI
+  - Wall
+  - FlyPickup
   layers:
   - Default
   - TransparentFX

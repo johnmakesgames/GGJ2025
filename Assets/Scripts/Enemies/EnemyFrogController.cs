@@ -18,6 +18,9 @@ public class EnemyFrogController : MonoBehaviour
 
     EnemyStats stats;
 
+    [SerializeField]
+    Animator spriteAnimator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -60,6 +63,8 @@ public class EnemyFrogController : MonoBehaviour
 
         if (waitTimeAfterLanding < 0.1f)
         {
+            spriteAnimator.SetBool("IsGrounded", false);
+
             // When going right we want to reduce theta, when going left we want to increase it.
             curTheta += (moveSpeed * Time.deltaTime) * direction;
             Vector2 newPos = new Vector2();
@@ -92,6 +97,7 @@ public class EnemyFrogController : MonoBehaviour
                 }
 
                 waitTimeAfterLanding = DelayFromLanding;
+                spriteAnimator.SetBool("IsGrounded", true);
             }
         }
 
@@ -103,9 +109,13 @@ public class EnemyFrogController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.position.y < this.transform.position.y && collision.gameObject.CompareTag("JohnTestGround"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            var stats = collision.gameObject.GetComponent<PlayerStats>();
+            if (stats)
+            {
+                stats.Health -= this.stats.GetDamageFromEnemy();
+            }
         }
     }
 }
