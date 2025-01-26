@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour
     private Transform tongueEndPosition;
     [SerializeField]
     private GameObject tongueSprite;
+    public bool InShop;
 
     [Header("Debugs")]
     [SerializeField] private bool bubbleDetailLog;
@@ -424,14 +425,14 @@ public class PlayerController : MonoBehaviour
         {
             isTongueExtended = true;
             canExtendTongue = false;
-            tongueGoingRight = true;
+            tongueGoingRight = isFacingRight;
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && canExtendTongue)
         {
             isTongueExtended = true;
             canExtendTongue = false;
-            tongueGoingRight = false;
+            tongueGoingRight = !isFacingRight;
         }
 
         float normalisedTongueLength = tongueLength / maxTongueLength;
@@ -509,7 +510,7 @@ public class PlayerController : MonoBehaviour
         //Update crosshair position.
         crosshairSprite.transform.position = Input.mousePosition;
 
-        if (ammoCount > 0)
+        if (ammoCount > 0 && !InShop)
         {
             //Show crosshair while we are aiming.
             if (Input.GetKeyDown(KeyCode.Mouse0))

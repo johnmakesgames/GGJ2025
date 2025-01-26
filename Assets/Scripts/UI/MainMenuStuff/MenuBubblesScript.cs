@@ -16,10 +16,21 @@ public class MenuBubblesScript : MonoBehaviour
     {
         Vector3 nextPos = this.transform.position;
 
-        if (this.transform.position.y > resetY)
+        if (movementSpeed > 0)
         {
-            nextPos.y = startY;
+            if (this.transform.position.y > resetY)
+            {
+                nextPos.y = startY;
+            }
         }
+        else
+        {
+            if (this.transform.position.y < resetY)
+            {
+                nextPos.y = startY;
+            }
+        }
+            
 
         nextPos.y += movementSpeed * Time.deltaTime;
         nextPos.x += (Mathf.Sin(nextPos.y) * Time.deltaTime) / 2;

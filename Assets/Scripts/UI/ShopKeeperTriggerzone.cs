@@ -52,6 +52,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             shopKeeperUI.GetComponent<ShopKeeperUI>()?.SetShopImages(ItemOneImage, ItemTwoImage, ItemThreeImage, ItemFourImage);
 
             collision.gameObject.GetComponent<PlayerStats>().distanceThroughLevel = Mathf.Max(collision.gameObject.GetComponent<PlayerStats>().distanceThroughLevel, NormalizedPercentageThroughLevel);
+            collision.gameObject.GetComponent<PlayerController>().InShop = true;
 
             crossHair?.SetActive(false);
         }
@@ -61,6 +62,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<PlayerController>().InShop = false;
             shopKeeperUI?.SetActive(false);
             crossHair?.SetActive(true);
         }
