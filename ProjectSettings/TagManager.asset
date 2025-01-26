@@ -9,6 +9,7 @@ TagManager:
   - BubbleUIContainer
   - ShopUI
   - Wall
+  - FlyPickup
   layers:
   - Default
   - TransparentFX
